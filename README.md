@@ -29,9 +29,7 @@ def linear_regression(X1, y, learning_rate=0.1, num_iters=1000):
     return theta
 data=pd.read_csv("50_Startups.csv")
 data.head()
-```
 <img width="651" height="243" alt="image" src="https://github.com/user-attachments/assets/75393fd8-ac23-4c22-bea3-15f509261693" />
-```
 X=(data.iloc[1:,:-2].values)
 X1=X.astype(float)
 
@@ -40,17 +38,10 @@ y=(data.iloc[1:,-1].values).reshape(-1,1)
 X1_Scaled=scaler.fit_transform(X1)
 Y1_Scaled=scaler.fit_transform(y)
 print(X)
-```
 <img width="271" height="871" alt="image" src="https://github.com/user-attachments/assets/e89cb396-3e8a-406c-9d83-d0194202fd77" />
-
-
-```
 print(X1_Scaled)
-```
 
 <img width="397" height="869" alt="image" src="https://github.com/user-attachments/assets/97da93c5-7c1a-4645-8788-3fa678c850b6" />
-
-```
 theta=linear_regression(X1_Scaled, Y1_Scaled)
 new_data= np.array([165349.2 , 136897.8 , 471784.1]).reshape(-1,1)
 new_scaled=scaler.fit_transform(new_data)
