@@ -42,10 +42,14 @@ Y1_Scaled=scaler.fit_transform(y)
 print(X)
 ```
 <img width="271" height="871" alt="image" src="https://github.com/user-attachments/assets/e89cb396-3e8a-406c-9d83-d0194202fd77" />
+
+
 ```
 print(X1_Scaled)
 ```
+
 <img width="397" height="869" alt="image" src="https://github.com/user-attachments/assets/97da93c5-7c1a-4645-8788-3fa678c850b6" />
+
 ```
 theta=linear_regression(X1_Scaled, Y1_Scaled)
 new_data= np.array([165349.2 , 136897.8 , 471784.1]).reshape(-1,1)
