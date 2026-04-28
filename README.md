@@ -8,95 +8,54 @@ To write a program to predict the profit of a city using the linear regression m
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. Get the independent variable X and dependent variable Y.
-2. Calculate the mean of the X -values and the mean of the Y -values.
-3. Find the slope m of the line of best fit using the formula.
-4. <img width="231" height="100" alt="583965822-99f10441-22da-425d-a0ba-e4b6621b1cc9" src="https://github.com/user-attachments/assets/8b5fa0f3-2137-4bf7-8d7e-75170073b73d" />
-5. Compute the y -intercept of the line by using the formula:
-<img width="295" height="79" alt="image" src="https://github.com/user-attachments/assets/db3215b1-b672-48cd-9a2c-86ee28ad0b4c" />
-6. Use the slope m and the y -intercept to form the equation of the line.
-7. Obtain the straight line equation Y=mX+b and plot the scatterplot.
+1.Import the required library and read the dataframe.
+2.Write a function computeCost to generate the cost function.
+3.Perform iterations og gradient steps with learning rate.
+4.Plot the Cost function using Gradient Descent and generate the required graph.
 
 ## Program:
 ```
-/*
-# Program to implement Linear Regression using Gradient Descent
-# Developed by: Iswarya S
-# Register Number: 212225040135
-
-# Step 1: Import Libraries
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import pandas as pd 
+from sklearn.preprocessing import StandardScaler
 
-# Step 2: Create Dataset (Hours studied vs Marks scored)
-data = {
-    "Hours_Studied": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    "Marks_Scored":  [35, 40, 50, 55, 60, 65, 70, 80, 85, 95]
-}
-
-df = pd.DataFrame(data)
-
-# Display dataset
-print("Dataset:\n", df)
-
-# Step 3: Define Variables
-X = np.array(df["Hours_Studied"])
-y = np.array(df["Marks_Scored"])
-
-# Step 4: Initialize Parameters
-m = 0   # Slope
-b = 0   # Intercept
-
-learning_rate = 0.01
-epochs = 1000
-n = len(X)
-
-# Step 5: Gradient Descent Algorithm
-for i in range(epochs):
-
-    # Predicted values
-    y_pred = m * X + b
-
-    # Calculate gradients
-    dm = (-2/n) * sum(X * (y - y_pred))
-    db = (-2/n) * sum(y - y_pred)
-
-    # Update parameters
-    m = m - learning_rate * dm
-    b = b - learning_rate * db
-
-# Step 6: Print Model Parameters
-print("\nModel Parameters:")
-print("Slope (m):", m)
-print("Intercept (b):", b)
-
-# Step 7: Predictions
-predictions = m * X + b
-
-# Step 8: Visualization
-plt.figure(figsize=(8,6))
-plt.scatter(X, y, label="Actual Data")
-plt.plot(X, predictions, linewidth=2, label="Regression Line")
-plt.xlabel("Hours Studied")
-plt.ylabel("Marks Scored")
-plt.title("Linear Regression using Gradient Descent")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-# Step 9: Predict for custom input
-hours = float(input("Enter study hours: "))
-
-predicted_marks = m * hours + b
-
-print(f"Predicted marks for {hours} hours = {predicted_marks:.2f}")
-*/
+def linear_regression(X1, y, learning_rate=0.1, num_iters=1000):
+    X=np.c_[np.ones(len(X1)),X1]
+    theta=np.zeros(X.shape[1]).reshape(-1,1)
+    for _ in range(num_iters):
+        predictions=(X).dot(theta).reshape(-1,1)
+        errors=(predictions-y).reshape(-1,1)
+        theta -=learning_rate*(1/len(X1))*X.T.dot(errors)
+    return theta
+data=pd.read_csv("50_Startups.csv")
+data.head()
 ```
+<img width="651" height="243" alt="image" src="https://github.com/user-attachments/assets/75393fd8-ac23-4c22-bea3-15f509261693" />
+```
+X=(data.iloc[1:,:-2].values)
+X1=X.astype(float)
 
-## Output:
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/135b0bfb-4fa4-4ff9-8927-385dec1b5346" />
-
-
+scaler=StandardScaler()
+y=(data.iloc[1:,-1].values).reshape(-1,1)
+X1_Scaled=scaler.fit_transform(X1)
+Y1_Scaled=scaler.fit_transform(y)
+print(X)
+```
+<img width="271" height="871" alt="image" src="https://github.com/user-attachments/assets/e89cb396-3e8a-406c-9d83-d0194202fd77" />
+```
+print(X1_Scaled)
+```
+<img width="397" height="869" alt="image" src="https://github.com/user-attachments/assets/97da93c5-7c1a-4645-8788-3fa678c850b6" />
+```
+theta=linear_regression(X1_Scaled, Y1_Scaled)
+new_data= np.array([165349.2 , 136897.8 , 471784.1]).reshape(-1,1)
+new_scaled=scaler.fit_transform(new_data)
+prediction=np.dot(np.append(1, new_scaled), theta)
+prediction= prediction.reshape(-1,1)
+pre = scaler.inverse_transform(prediction)
+print(prediction)
+print(f"Predicted value: {pre}")
+```
+<img width="294" height="50" alt="image" src="https://github.com/user-attachments/assets/e481f806-d06c-4557-b5e3-e22c4c03b79a" />
 ## Result:
 Thus the program to implement the linear regression using gradient descent is written and verified using python programming.
