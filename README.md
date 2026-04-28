@@ -52,7 +52,6 @@ print(X)
 print(X1_Scaled)
 ```
 
-```
 <img width="397" height="869" alt="image" src="https://github.com/user-attachments/assets/97da93c5-7c1a-4645-8788-3fa678c850b6" />
 
 ```
@@ -64,6 +63,7 @@ prediction= prediction.reshape(-1,1)
 pre = scaler.inverse_transform(prediction)
 print(prediction)
 print(f"Predicted value: {pre}")
+
 ```
 <img width="294" height="50" alt="image" src="https://github.com/user-attachments/assets/e481f806-d06c-4557-b5e3-e22c4c03b79a" />
 ## Result:
